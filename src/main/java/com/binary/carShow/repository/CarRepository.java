@@ -1,4 +1,9 @@
 package com.binary.carShow.repository;
 
-public interface CarRepository {
+import com.binary.carShow.entity.Car;
+import org.springframework.data.repository.CrudRepository;
+
+public interface CarRepository  extends CrudRepository<Car,Long> {
+    //CRUD
+
 }
