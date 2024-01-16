@@ -44,4 +44,10 @@ public ResponseEntity<Car> removeCarById(@PathVariable Long id){
         carService.removeCarById(id);
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
 }
+@PutMapping("/{id}")
+public ResponseEntity<Car> UpdateCarById(@PathVariable Long id, @RequestBody Car car){
+
+        return  new ResponseEntity<> (carService.UpdateCarById(id,car),HttpStatus.CREATED);
+
+}
 }

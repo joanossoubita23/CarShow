@@ -45,6 +45,21 @@ public class CarserviceImplem implements  CarService{
 
     }
 
+    @Override
+    public Car UpdateCarById(Long id, Car car) {
+        Car existingCar= getCarById(id);
+        existingCar.setMake(car.getMake());
+        existingCar.setModel(car.getModel());
+        existingCar.setColor(car.getColor());
+        existingCar.setYear(car.getYear());
+        existingCar.setPrice(car.getPrice());
+        existingCar.setOwner(car.getOwner());
+        existingCar.setRegisterNumber(car.getRegisterNumber());
+        carRepository.save(existingCar);
+        return existingCar;
+
+    }
+
 
 }
 
