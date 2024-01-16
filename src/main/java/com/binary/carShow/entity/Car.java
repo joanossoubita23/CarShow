@@ -1,9 +1,6 @@
 package com.binary.carShow.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 
@@ -29,14 +26,26 @@ public class Car {
     private String registerNumber;
     private int year;
     private double price;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    private  Owner owner;
 
-    public Car(String make, String model, String color, String registerNumber, int year, double price) {
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public Car(String make, String model, String color, String registerNumber, int year, double price, Owner owner) {
         this.make = make;
         this.model = model;
         this.color = color;
         this.registerNumber = registerNumber;
         this.year = year;
         this.price = price;
+        this.owner=owner;
     }
 
     public String getMake() {
