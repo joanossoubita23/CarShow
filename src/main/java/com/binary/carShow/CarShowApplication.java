@@ -3,8 +3,11 @@ package com.binary.carShow;
 
 import com.binary.carShow.entity.Car;
 import com.binary.carShow.entity.Owner;
+import com.binary.carShow.entity.User;
+import com.binary.carShow.exception.ApiError;
 import com.binary.carShow.repository.CarRepository;
 import com.binary.carShow.repository.OwnerRepository;
+import com.binary.carShow.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +16,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +27,8 @@ import java.util.List;
 //@Configuration // this annotation is used to define a configuration class that bean to Spring application
 @SpringBootApplication
 public class CarShowApplication implements CommandLineRunner {
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private CarRepository carRepository;
 	@Autowired
@@ -54,9 +60,15 @@ public class CarShowApplication implements CommandLineRunner {
 				new Car("Honda","Accord","White","HW-345",2024,57000,owner1)
 		);
 		carRepository.saveAll(cars);
+		userRepository.save(new User("user","$2y$10$BeuXKCoQTknMz.sYeNPk1ul3OqmjdRxlD14VlNgiJSMD8AYzqfiLe","USER"));
+		userRepository.save(new User("admin","$2y$10$/FoQQvlidsIFZ8AurYCZU.7XGxVzlcOwkOmgARh3CPAtA0AORazxS","ADMIN"));
 		carRepository.
 				findAll().forEach(car -> logger.info(car.getMake()+" "+ car.getModel()));
 		ownerRepository.findAll().forEach(ow -> logger.info(ow.getFirstName()));
+		//ApiError Ap=new ApiError("localhost:8080","not found",404, LocalDateTime.now());
 
 	}
+
+
+
 }

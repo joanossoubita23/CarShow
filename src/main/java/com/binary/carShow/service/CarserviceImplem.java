@@ -1,6 +1,7 @@
 package com.binary.carShow.service;
 
 import com.binary.carShow.entity.Car;
+import com.binary.carShow.exception.ResourceNotFoundException;
 import com.binary.carShow.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,15 @@ public class CarserviceImplem implements  CarService{
 
     @Override
     public Car getCarById(Long id) {
-        Optional<Car> optionalCar = carRepository.findById(id);
-        if (optionalCar.isPresent()) {
-            return optionalCar.get();
-        } else {
-            throw  new EntityNotFoundException("Car with id"+id+"id not found");
-
-        }
+//        Optional<Car> optionalCar = carRepository.findById(id);
+//        if (optionalCar.isPresent()) {
+//            return optionalCar.get();
+//        } else {
+//            throw  new ResourceNotFoundException("Car with id"+id+"id not found");
+//
+//        }
+   return carRepository.findById(id).
+            orElseThrow(()->new ResourceNotFoundException("Car with id"+id+"not found"));
 
     }
 
